@@ -22,7 +22,13 @@ def main():
             ask_question = True
             while ask_question:
                 required_items(list_of_items, "r")
-                mark_completion = int(input("Enter the number of an item to be marked as completed. "))
+                while True:
+                    try:
+                        mark_completion = int(input("Enter the number of an item to be marked as completed. "))
+                        break
+                    except ValueError:
+                        print("You did not enter a number. Please enter a number.")
+
                 write_list = list_of_writable_items(list_of_items, "r")
                 completed_list = list_of_writable_items(list_of_items, "c")
                 if mark_completion < len(write_list):
