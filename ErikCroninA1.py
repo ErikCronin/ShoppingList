@@ -12,11 +12,7 @@ def main():
             required_items(list_of_items, "c")
         # Add New Items
         elif menu_choice == "A":
-
-            list_of_items.append(new_item())
-            print(list_of_items)
-
-
+            print("You chose A")
         # Mark an item as completed
         elif menu_choice == "M":
             ask_question = True
@@ -75,15 +71,6 @@ def list_of_writable_items(shopping_list, status):
             write_list.append(line_str)
     return write_list
 
-
-def new_item():
-    item_name = str(input("Name of new item: "))
-    item_price = str(input("Price of new item: "))
-    item_priority = str(input("Priority of new item: "))
-    new_string = "{},{},{},r".format(item_name, item_price, item_priority)
-
-    print(new_string)
-    return new_string
 
 
 main()
