@@ -4,16 +4,20 @@ def main():
     print("Shopping List 1.0 - by Erik Cronin")
     menu_choice = menu_choice_func()
     while menu_choice != "Q":
+
         # List Required Items
         if menu_choice == "R":
             required_items(list_of_items, "r")
+
         # List Completed Items
         elif menu_choice == "C":
             required_items(list_of_items, "c")
+
         # Add New Items
         elif menu_choice == "A":
             print("You chose A")
         # Mark an item as completed
+
         elif menu_choice == "M":
             ask_question = True
             while ask_question:
@@ -31,7 +35,10 @@ def main():
                     ask_question = False
                 else:
                     print("Invalid input!")
-
+                    
+        # Error Check
+        else:
+            print("Invalid Input! Please try again.")
         menu_choice = menu_choice_func()
     print("exiting shopping list")
 
@@ -70,7 +77,6 @@ def list_of_writable_items(shopping_list, status):
         if line_str[-1] == status:
             write_list.append(line_str)
     return write_list
-
 
 
 main()
