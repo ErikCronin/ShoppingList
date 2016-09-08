@@ -1,3 +1,13 @@
+"""
+Erik Cronin
+08/09/2016
+This program aims to create a shopping list.
+Users can show completed or needed items, add their own items and
+check off the required items into the completed category.
+Github: https://github.com/ErikCronin/ShoppingList
+"""
+
+
 def main():
     shopping_list = open("items.csv", "r")
     list_of_items = marked_func(shopping_list)
@@ -15,14 +25,12 @@ def main():
 
         # Add New Items
         elif menu_choice == "A":
-            new_item_list = ""
             item_name = str(input("Enter the name of the new item: "))
             item_price = str(input("Enter the price of the new item: "))
             item_priority = str(input("Enter the priority of the new item: "))
-            new_item_list = new_item_list.join(item_name + item_price + item_priority)
-            print(new_item_list)
-            list_of_items = list_of_items([new_item_list])
-            print(list_of_items)
+            new_item_list = item_name + "," + item_price + "," + item_priority + ",r"
+            list_of_items.append(new_item_list)
+            print(item_name, "has been added to the list")
 
         # Mark an item as completed
         elif menu_choice == "M":
@@ -38,8 +46,8 @@ def main():
                 write_list = list_of_writable_items(list_of_items, "r")
                 completed_list = list_of_writable_items(list_of_items, "c")
                 if mark_completion < len(write_list):
-                    print(write_list[mark_completion])
-                    write_list[mark_completion] = write_list[mark_completion] + "c"
+                    print("Item number", mark_completion, "has been marked off")
+                    write_list[mark_completion] += "c"
                     completed_list.append(write_list[mark_completion])
                     write_list.remove(write_list[mark_completion])
                     list_of_items = write_list + completed_list
@@ -75,13 +83,12 @@ def required_items(shopping_list, status):
             line_number += 1
 
 
-# Function to create a formattable list of items in the shopping list
+# Function to load shopping list into internal memory
 def marked_func(shopping_list):
     list_of_items = []
     for item in shopping_list:
         item = item.strip("\n")
         list_of_items.append(item)
-
     return list_of_items
 
 
