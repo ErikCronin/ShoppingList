@@ -1,6 +1,6 @@
 """
 Erik Cronin
-08/09/2016
+09/09/2016
 This program aims to create a shopping list.
 Users can show completed or needed items, add their own items and
 check off the required items into the completed category.
@@ -9,7 +9,7 @@ Github: https://github.com/ErikCronin/ShoppingList
 
 
 def main():
-    shopping_list = open("items.csv", "r")
+    shopping_list = open("items.csv", "r+")
     list_of_items = marked_func(shopping_list)
     print("Shopping List 1.0 - by Erik Cronin")
     menu_choice = menu_choice_func()
@@ -58,8 +58,13 @@ def main():
         # Error Check
         else:
             print("Invalid Input! Please try again.")
+
         menu_choice = menu_choice_func()
-    print("exiting shopping list")
+    shopping_list = open("items.csv", "w")
+    for item in list_of_items:
+        shopping_list.writelines(item + '\n')
+    shopping_list.close()
+    print("Shopping list has been saved.\nHave a nice day :)")
 
 
 # Function for choosing menu option
@@ -81,6 +86,7 @@ def required_items(shopping_list, status):
             line_str[1] = float(line_str[1])
             print("{:1}. {:20} ${:10.2f} ({:s})".format(line_number, line_str[0], line_str[1], line_str[2]))
             line_number += 1
+    return line_str
 
 
 # Function to load shopping list into internal memory
